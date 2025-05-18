@@ -1,0 +1,219 @@
+/* Premium and Luxurious Design for GetAll Component */
+body {
+  font-size: 15px; /* Base font size for better consistency */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Unified Card Styling */
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* Consistent Heading & Text Styling */
+.form-label {
+  font-size: 0.95rem !important;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.fs-5 {
+  font-size: 0.95rem !important;
+  font-weight: 500;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+/* Search Form Styling - More Aligned & Premium */
+.input-group .form-control {
+  height: 42px;
+  font-size: 0.95rem;
+  border-radius: 8px 0 0 8px;
+  border: 1px solid #ced4da;
+  box-shadow: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input-group .form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-group .btn {
+  height: 42px;
+  font-size: 0.95rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Consistent Button Styling */
+.btn {
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+  border: none;
+  box-shadow: 0 2px 5px rgba(10, 88, 202, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+  box-shadow: 0 4px 8px rgba(10, 88, 202, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-outline-primary {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-lg {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+/* Page Size Buttons - Better Alignment */
+.btn-group .btn {
+  font-size: 0.95rem;
+  padding: 0.375rem 0.75rem;
+  border-width: 1px;
+}
+
+/* Status Card for "Showing X - Y of Z contacts" */
+.card .card-body.py-2 {
+  padding: 0.75rem 1.25rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Table Styling - Consistency with other elements */
+.contacts-table {
+  table-layout: fixed;
+  margin-bottom: 0;
+}
+
+.contacts-table thead th {
+  background: linear-gradient(135deg, #0d6efd, #0a58ca) !important;
+  color: white;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contacts-table td {
+  padding: 0.75rem 0.5rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Pagination Styling - More Consistent with Table */
+.pagination-card .card-body {
+  padding: 0.75rem 1.25rem;
+}
+
+.pagination-controls .btn {
+  font-size: 0.95rem;
+  padding: 0.375rem 0.75rem;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+/* Fix for specific alignment issues */
+.align-items-center .fs-5 {
+  margin-bottom: 0;
+}
+
+.row.align-items-center {
+  margin-bottom: 0;
+}
+
+/* Consistent alert styling */
+.alert {
+  border-radius: 8px;
+  font-size: 0.95rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #d1e7dd, #c3dfd9);
+  color: #0f5132;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #f8d7da, #f5c2c7);
+  color: #842029;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 991.98px) {
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .row.align-items-center .col-md-4 {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .btn-group {
+    display: flex;
+    width: 100%;
+  }
+  
+  .btn-group .btn {
+    flex: 1;
+  }
+  
+  .pagination-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .pagination-controls .btn-group {
+    width: 100%;
+  }
+}
+

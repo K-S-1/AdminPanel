@@ -1,0 +1,92 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs'; // Import Observable and throwError
+import { catchError } from 'rxjs/operators'; // Import catchError operator
+import { Contact } from '../models/contact';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ContactServiceService {
+  private baseURl = '/contactManagement'; // Assuming proxy is configured correctly
+
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Fetches all contacts from the backend.
+   * Expects a JSON array of Contact objects.
+   */
+  getAllData(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`${this.baseURl}/getAllContact`)
+      .pipe(
+        catchError(this.handleError) // Call the handleError method
+      );
+  }
+
+  /**
+   * Adds a new contact.
+   * Expects a text response (like an ID or success message).
+   */
+  addData(contact: Contact): Observable<string> {
+    return this.http.post(`${this.baseURl}/addContact`, contact, {
+      responseType: 'text',
+    }).pipe(
+      catchError(this.handleError) // Call the handleError method
+    );
+  }
+
+  /**
+   * Updates an existing contact.
+   * Expects a text response.
+   */
+  updateData(id: number, contact: Contact): Observable<string> {
+    return this.http.put(`${this.baseURl}/updateContact/${id}`, contact, {
+      responseType: 'text',
+    }).pipe(
+      catchError(this.handleError) // Call the handleError method
+    );
+  }
+
+  /**
+   * Deletes a contact by ID.
+   * Expects a text response.
+   */
+  deleteData(id: number): Observable<string> {
+    return this.http.delete(`${this.baseURl}/deleteContact/${id}`, {
+      responseType: 'text',
+    }).pipe(
+      catchError(this.handleError) // Call the handleError method
+    );
+  }
+
+  // =============================================================
+  // == THIS METHOD NEEDS TO BE INSIDE THE CLASS DEFINITION ==
+  // =============================================================
+  private handleError(error: HttpErrorResponse): Observable<never> { // Correct return type for throwError
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${error.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      if (typeof error.error === 'string' && error.error.trim().startsWith('<')) {
+         // Check if the error response *is* actually HTML (e.g., from a server error page)
+         errorMessage = `Server returned an HTML error page (Status: ${error.status}). Check server logs and network tab.`;
+      } else if (typeof error.error === 'string' && error.error.length > 0) {
+         // Use the text error message from the backend if available
+         errorMessage = error.error;
+      }
+      else {
+         // Try to get more specific error message if backend sends structured errors or just use status text
+         errorMessage = `Server returned code ${error.status}. ${error.statusText || error.message || ''}`;
+      }
+    }
+    console.error('API Error:', error); // Log the full error object for debugging
+    // Return an observable that emits a user-friendly error message
+    // Use the factory function form for throwError
+    return throwError(() => new Error(errorMessage));
+  }
+  // =============================================================
+
+} // <--- Make sure handleError is defined BEFORE this closing brace

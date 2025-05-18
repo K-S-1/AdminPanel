@@ -1,0 +1,14 @@
+{
+    "/adminPanel": {
+        "target": "http://localhost:7000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/auth": {
+        "target": "http://localhost:7000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

@@ -1,0 +1,22 @@
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card img {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card img:hover {
+    transform: scale(1.05);
+  }
+  
+  .form-control:disabled {
+    background-color: #f8f9fa;
+    opacity: 1;
+  }
+
+  .rounded-circle {
+    border-radius: 50% !important;
+  }
+  

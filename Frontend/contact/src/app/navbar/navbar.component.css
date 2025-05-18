@@ -1,0 +1,75 @@
+/* Luxurious Blue Gradient Navbar */
+.navbar {
+  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+  transition: all 0.3s ease-in-out;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 12px 12px;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-toggler {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(100);
+}
+
+.nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin: 0 0.25rem;
+  padding: 0.5rem 1rem !important;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.nav-link i {
+  margin-right: 6px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+/* Mobile adjustments */
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .nav-link {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .navbar {
+    border-radius: 0;
+  }
+}
+
+/* Content spacing below navbar */
+body {
+  padding-top: 70px;
+}

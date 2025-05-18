@@ -1,0 +1,4 @@
+/* Custom styles for the delete confirmation modal if needed */
+.modal-body strong {
+    word-break: break-word; /* Prevent long names from breaking layout */
+  }

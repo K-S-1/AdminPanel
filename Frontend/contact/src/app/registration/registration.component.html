@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo-container">
+                    <img src="download.png" alt="Logo" class="logo">
+                </div>
+                <h1 class="app-name">Contact</h1>
+            </div>
+
+            <form [formGroup]="registrationForm" (ngSubmit)="submittedForm()" class="login-form">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input 
+                            type="text" 
+                            formControlName="name" 
+                            placeholder="Full Name"
+                            [ngClass]="{'invalid': f['name'].touched && f['name'].invalid}">
+                    </div>
+                    <div class="error-message" *ngIf="f['name'].touched && f['name'].invalid">
+                        <span *ngIf="f['name'].errors?.['required']">Name is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-envelope"></i>
+                        <input 
+                            type="email" 
+                            formControlName="userName" 
+                            placeholder="Email"
+                            [ngClass]="{'invalid': f['userName'].touched && f['userName'].invalid}">
+                    </div>
+                    <div class="error-message" *ngIf="f['userName'].touched && f['userName'].invalid">
+                        <span *ngIf="f['userName'].errors?.['required']">Email is required</span>
+                        <span *ngIf="f['userName'].errors?.['email']">Please enter a valid email</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock"></i>
+                        <input 
+                            [type]="showPassword ? 'text' : 'password'"
+                            formControlName="password" 
+                            placeholder="Password"
+                            [ngClass]="{'invalid': f['password'].touched && f['password'].invalid}">
+                        <i *ngIf="registrationForm?.get('password')?.value"
+                            class="fas password-toggle" 
+                            [class.fa-eye]="!showPassword"
+                            [class.fa-eye-slash]="showPassword"
+                            (click)="togglePasswordVisibility()"></i>
+                    </div>
+                    <div class="error-message" *ngIf="f['password'].touched && f['password'].invalid">
+                        <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+                        <span *ngIf="f['password'].errors?.['minlength']">Password must be at least 8 characters</span>
+                    </div>
+                </div>
+
+                <button 
+                    type="submit" 
+                    class="login-button"
+                    [disabled]="registrationForm.invalid || isSubmitting">
+                    <span *ngIf="!isSubmitting">Register</span>
+                    <span *ngIf="isSubmitting" class="spinner"></span>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <span>Already have an account?</span>
+                <span class="separator">|</span>
+                <a routerLink="/login-user" class="signup">Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

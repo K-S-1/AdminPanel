@@ -1,0 +1,70 @@
+<div class="modal-header bg-primary text-white">
+  <h4 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Edit Admin User</h4>
+  <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="dismiss()" [disabled]="isSaving"></button>
+</div>
+
+<div class="modal-body">
+  <div *ngIf="error" class="alert alert-danger">
+    <i class="bi bi-exclamation-circle-fill me-2"></i> {{ error }}
+  </div>
+
+  <form #updateForm="ngForm" (ngSubmit)="onSubmit(updateForm)">
+    <!-- Name Field -->
+    <div class="mb-3">
+      <label for="updateName" class="form-label">Name *</label>
+      <input type="text" class="form-control" id="updateName" name="name" [(ngModel)]="currentContact.name" required minlength="3" #name="ngModel" [ngClass]="{'is-invalid': updateForm.submitted && name.invalid}">
+      <div *ngIf="updateForm.submitted && name.invalid" class="invalid-feedback">Name is required and must be at least 3 characters.</div>
+    </div>
+
+    <!-- Date of Birth Field -->
+    <div class="mb-3">
+      <label for="updateDob" class="form-label">Date of Birth *</label>
+      <input type="date" class="form-control" id="updateDob" name="dob" [(ngModel)]="currentContact.dob" required #dob="ngModel" [ngClass]="{'is-invalid': updateForm.submitted && dob.invalid}">
+      <div *ngIf="updateForm.submitted && dob.invalid" class="invalid-feedback">Date of Birth is required.</div>
+    </div>
+
+    <!-- Gender Field -->
+    <div class="mb-3">
+      <label for="updateGender" class="form-label">Gender *</label>
+      <select class="form-select" id="updateGender" name="gender" [(ngModel)]="currentContact.gender" required #gender="ngModel" [ngClass]="{'is-invalid': updateForm.submitted && gender.invalid}">
+        <option value="" disabled>Select Gender</option>
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+        <option value="OTHER">Other</option>
+      </select>
+      <div *ngIf="updateForm.submitted && gender.invalid" class="invalid-feedback">Gender is required.</div>
+    </div>
+
+    <!-- Address Field -->
+    <div class="mb-3">
+      <label for="updateAddress" class="form-label">Address *</label>
+      <textarea class="form-control" id="updateAddress" name="address" rows="3" [(ngModel)]="currentContact.address" required #address="ngModel" [ngClass]="{'is-invalid': updateForm.submitted && address.invalid}"></textarea>
+      <div *ngIf="updateForm.submitted && address.invalid" class="invalid-feedback">Address is required.</div>
+    </div>
+
+    <!-- Contact Number Field -->
+    <div class="mb-3">
+      <label for="updateContactNumber" class="form-label">Contact Number *</label>
+      <input type="text" class="form-control" id="updateContactNumber" name="contactNumber" [(ngModel)]="currentContact.contactNumber" required pattern="^[6-9]\d{9}$" #contactNumber="ngModel" [ngClass]="{'is-invalid': updateForm.submitted && contactNumber.invalid}">
+      <div *ngIf="updateForm.submitted && contactNumber.invalid" class="invalid-feedback">Enter a valid 10-digit mobile number.</div>
+    </div>
+
+    <!-- Pincode Field -->
+    <div class="mb-3">
+      <label for="updatePinCode" class="form-label">Pincode *</label>
+      <input type="text" class="form-control" id="updatePinCode" name="pinCode" [(ngModel)]="currentContact.pinCode" required pattern="^\d{6}$" #pinCode="ngModel" [ngClass]="{'is-invalid': updateForm.submitted && pinCode.invalid}">
+      <div *ngIf="updateForm.submitted && pinCode.invalid" class="invalid-feedback">Enter a valid 6-digit pincode.</div>
+    </div>
+
+    <div *ngIf="isSaving" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Saving...</span>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="dismiss()" [disabled]="isSaving">Cancel</button>
+  <button type="submit" class="btn btn-primary" (click)="updateForm.ngSubmit.emit()" [disabled]="isSaving || updateForm.invalid">Save Changes</button>
+</div>

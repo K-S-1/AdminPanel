@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSegwWRwxuVUkzeGdPxkRZxZdw6yWk2kUZItA&s"
+                        alt="Logo" class="logo" />
+                </div>
+                <h1 class="app-name">AdminPanel</h1>
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="submittedForm()" class="login-form">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" formControlName="userName" placeholder="Email" [ngClass]="{
+                  invalid: f['userName'].touched && f['userName'].invalid
+                }" />
+                    </div>
+                    <div class="error-message" *ngIf="f['userName'].touched && f['userName'].invalid">
+                        <span *ngIf="f['userName'].errors?.['required']">Email is required</span>
+                        <span *ngIf="f['userName'].errors?.['email']">Please enter a valid email</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock"></i>
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            placeholder="Password" [ngClass]="{
+                  invalid: f['password'].touched && f['password'].invalid
+                }" />
+                        <i *ngIf="loginForm?.get('password')?.value" class="fas password-toggle"
+                            [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+                            (click)="togglePasswordVisibility()"></i>
+                    </div>
+                    <div class="error-message" *ngIf="f['password'].touched && f['password'].invalid">
+                        <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+                        <span *ngIf="f['password'].errors?.['minlength']">Password must be at least 8 characters</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <re-captcha formControlName="recaptcha" (resolved)="token = $event">
+                    </re-captcha>
+                    <div *ngIf="f['recaptcha'].touched && f['recaptcha'].invalid" class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+
+
+                <button type="submit" class="login-button" [disabled]="loginForm.invalid || isSubmitting">
+                    <span *ngIf="!isSubmitting">Login</span>
+
+                    <span *ngIf="isSubmitting" class="spinner" (click)="send(ngForm)"></span>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <!-- <a href="#" class="forgot-password">Forgot Password?</a>
+                <span class="separator">|</span>
+                <a href="#" class="signup">Sign Up</a> -->
+                <a routerLink="/forgot-password" class="forgot-password">Forgot Password?</a>
+                <span class="separator">|</span>
+                <a routerLink="/registration-user" class="signup">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- {{jwttoken | json}} -->

@@ -1,0 +1,109 @@
+<div class="container mt-5">
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  
+    <!-- Profile Section -->
+    <div *ngIf="!isLoading">
+      <div class="card shadow-sm mb-5">
+        <div class="card-body">
+          <!-- Profile Header -->
+          <div class="d-flex align-items-center mb-4">
+            <div class="me-3">
+              <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center" 
+              *ngIf="!adminDetails.profileImage" 
+              style="width: 100px; height: 100px; font-size: 32px;">
+           {{ getInitials(adminDetails.name) }}
+         </div>
+         
+         <img *ngIf="adminDetails.profileImage"
+              [src]="'data:' + adminDetails.profileContentType + ';base64,' + adminDetails.profileImage" 
+              alt="Profile Picture" 
+              class="rounded-circle" 
+              style="width: 100px; height: 100px; object-fit: cover;">
+                     </div>
+              <div>
+              <h4 class="fw-bold">{{ adminDetails.name }}</h4>
+              <p class="text-muted">{{ adminDetails.userName }}</p>
+              <p class="mb-0"><strong>Role:</strong> {{ adminDetails.accessRole }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Editable Form -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form (ngSubmit)="updateProfile()">
+            <!-- Name Field -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" id="name" class="form-control" [(ngModel)]="adminDetails.name" name="name" required [disabled]="!isEditing">
+            </div>
+  
+            <!-- Date of Birth Field -->
+            <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input type="date" id="dob" class="form-control" [(ngModel)]="adminDetails.dob" name="dob" required [disabled]="!isEditing">
+            </div>
+  
+            <!-- Gender Field -->
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select id="gender" class="form-select" [(ngModel)]="adminDetails.gender" name="gender" [disabled]="!isEditing">
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+  
+            <!-- Address Field -->
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea id="address" class="form-control" [(ngModel)]="adminDetails.address" name="address" rows="3" [disabled]="!isEditing"></textarea>
+            </div>
+  
+            <!-- Contact Number -->
+            <div class="mb-3">
+              <label for="contactNumber" class="form-label">Contact Number</label>
+              <input type="text" id="contactNumber" class="form-control" [(ngModel)]="adminDetails.contactNumber" name="contactNumber" required [disabled]="!isEditing">
+            </div>
+  
+            <!-- Pincode -->
+            <div class="mb-3">
+              <label for="pinCode" class="form-label">Pincode</label>
+              <input type="text" id="pinCode" class="form-control" [(ngModel)]="adminDetails.pinCode" name="pinCode" [disabled]="!isEditing">
+            </div>
+  
+            <!-- Profile Image Upload -->
+            <div class="mb-3">
+              <label for="profileImage" class="form-label">Profile Image</label>
+              <input
+                type="file"
+                id="profileImage"
+                class="form-control"
+                name="profileImage"
+                (change)="onImageSelected($event)"
+                [disabled]="!isEditing"
+              />
+            </div>
+  
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary me-2" *ngIf="!isEditing" (click)="isEditing = true">Edit</button>
+              <button type="submit" class="btn btn-primary" *ngIf="isEditing">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>

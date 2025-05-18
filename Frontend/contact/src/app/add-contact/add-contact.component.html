@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br>
+    <div class="add-contact-container" @fadeInOut>
+        <h2>Add New Contact</h2>
+        <p class="subtitle">Fill in the details below to add a new contact.</p>
+      
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate [@formState]="formAnimationState">
+      
+          <!-- Name Field -->
+          <div class="form-field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" formControlName="name" placeholder="e.g., John Doe"
+                   [ngClass]="{'invalid-field': isInvalid('name')}">
+            <div *ngIf="isInvalid('name')" class="validation-errors" @fadeInOut>
+              <span *ngIf="name?.errors?.['required']">Name is required.</span>
+              <span *ngIf="name?.errors?.['minlength']">Name must be at least 3 characters long.</span>
+              <span *ngIf="name?.errors?.['maxlength']">Name cannot exceed 50 characters.</span>
+            </div>
+          </div>
+      
+          <!-- Mobile Number Field -->
+          <div class="form-field">
+            <label for="mobileNo">Mobile Number</label>
+            <input type="tel" id="mobileNo" formControlName="mobileNo" placeholder="e.g., 9876543210"
+                   [ngClass]="{'invalid-field': isInvalid('mobileNo')}">
+            <div *ngIf="isInvalid('mobileNo')" class="validation-errors" @fadeInOut>
+              <span *ngIf="mobileNo?.errors?.['required']">Mobile number is required.</span>
+              <span *ngIf="mobileNo?.errors?.['pattern']">Please enter a valid 10-digit mobile number.</span>
+            </div>
+          </div>
+      
+          <!-- Landline Number Field -->
+          <div class="form-field">
+            <label for="landLineNo">Landline Number</label>
+            <input type="tel" id="landLineNo" formControlName="landLineNo" placeholder="e.g., 0112345678"
+                   [ngClass]="{'invalid-field': isInvalid('landLineNo')}" required="">
+             <!-- Note: No 'required' validator -->
+            <div *ngIf="isInvalid('landLineNo')" class="validation-errors" @fadeInOut>
+              <span *ngIf="landLineNo?.errors?.['pattern']">Please enter a valid landline number (5-15 digits).</span>
+            </div>
+          </div>
+      
+          <!-- Address Field -->
+          <div class="form-field">
+            <label for="address">Address</label>
+            <textarea id="address" formControlName="address" placeholder="e.g., 123 Main St, Anytown" rows="3"
+                      [ngClass]="{'invalid-field': isInvalid('address')}"></textarea>
+            <div *ngIf="isInvalid('address')" class="validation-errors" @fadeInOut>
+              <span *ngIf="address?.errors?.['required']">Address is required.</span>
+              <span *ngIf="address?.errors?.['maxlength']">Address cannot exceed 200 characters.</span>
+            </div>
+          </div>
+      
+          <!-- Pincode Field -->
+          <div class="form-field">
+            <label for="pincode">Pincode</label>
+            <input type="text" id="pincode" formControlName="pincode" placeholder="e.g., 110011" inputmode="numeric"
+                   [ngClass]="{'invalid-field': isInvalid('pincode')}">
+            <div *ngIf="isInvalid('pincode')" class="validation-errors" @fadeInOut>
+              <span *ngIf="pincode?.errors?.['required']">Pincode is required.</span>
+              <span *ngIf="pincode?.errors?.['pattern']">Please enter a valid 6-digit pincode.</span>
+            </div>
+          </div>
+      
+          <!-- Submission Feedback Area -->
+          <div class="feedback-area">
+              <div *ngIf="submitSuccess" class="alert alert-success" @feedbackSlide>
+                  Contact added successfully!
+              </div>
+              <div *ngIf="submitError" class="alert alert-danger" @feedbackSlide>
+                  <strong>Error:</strong> {{ submitError }}
+              </div>
+          </div>
+      
+          <!-- Submit Button -->
+          <div class="submit-button-container">
+            <button type="submit" class="btn btn-submit" [disabled]="isSubmitting || contactForm.invalid">
+              <span *ngIf="!isSubmitting">
+                <i class="fas fa-user-plus icon-left"></i> Add Contact
+              </span>
+              <span *ngIf="isSubmitting">
+                <span class="spinner"></span> Adding...
+              </span>
+            </button>
+          </div>
+      
+        </form>
+      </div>
+</body>
+</html>

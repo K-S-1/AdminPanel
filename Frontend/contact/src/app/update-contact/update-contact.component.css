@@ -1,0 +1,11 @@
+Custom styles for the update modal if needed
+.modal-body {
+    max-height: 65vh; /* Allow scrolling if content is long */
+    overflow-y: auto;
+  }
+  
+  /* Ensure validation messages are clear */
+  .invalid-feedback {
+    display: block; /* Make sure feedback shows */
+    font-size: 0.875em;
+  }
