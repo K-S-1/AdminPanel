@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class EnvironmentService {
 
   constructor() { }
-   recaptcha = { siteKey: '6Ld7RSgrAAAAAEGnCGkKRydanSnksM-9Hs2PKMse' };
+   recaptcha = { siteKey: 'YOUR_KEY' };
 
 }
